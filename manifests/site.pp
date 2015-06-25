@@ -10,8 +10,9 @@ file { 'bash_profile':
 }
 
 class { 'boundary':
-    token => $boundary_api_token
+    token => $boundary_api_token,
 }
+
 
 node /^centos/ {
 
