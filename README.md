@@ -23,22 +23,22 @@ This provides operating system environments:
 
 ### Getting Started
 
-To install the Boundary Meter it is required that you have a Boundary _api token_ to perform the install in addition to the prequisites listed above.
+The Boundary meter is installed on each of the virtual machines via the [Boundary Puppet Module](https://forge.puppetlabs.com/puppetlabs/boundary). Boundary Meter installation requires that the _api token_ be known at install time. The Boundary API Token can be found in the _Settings_ -> _Account_ dialog in the Boundary user interface.
 
 ### List of Platforms to Virtual Machine Mapping
 
 The table below provides the mapping of platform to virtual machine name that is used later to start a virtual machine for testing plugins.
 
-| Platform             | Virtual Machine Name  |
-|:---------------------|:---------------------:|
-|Centos 5.11           |`centos-5.11`          |
-|Centos 6.6            |`centos-6.6`           |
-|Centos 7.0            |`centos-7.0`           |
-|Centos 7.1            |`centos-7.1`           |
-|Ubuntu 12.04          |`ubuntu-12.04`         |
-|Ubuntu 14.04          |`ubuntu-14.04`         |
-|Windows Server 2008 R2|`win-serv-2008-r2`     |
-|Windows Server 2012 R2|`win-serv-2012-r2`     |
+| Platform             | Virtual Machine Name  | Notes |
+|:---------------------|:---------------------:|:-----:|
+|Centos 5.11           |`centos-5.11`          |       |
+|Centos 6.6            |`centos-6.6`           |       |
+|Centos 7.0            |`centos-7.0`           |       |
+|Centos 7.1            |`centos-7.1`           |       |
+|Ubuntu 12.04          |`ubuntu-12.04`         |       |
+|Ubuntu 14.04          |`ubuntu-14.04`         |       |
+|Windows Server 2008 R2|`win-serv-2008-r2`     |       |
+|Windows Server 2012 R2|`win-serv-2012-r2`     |       |
 
 
 ### Starting a Virtual Machine
@@ -63,4 +63,16 @@ $ vagrant halt <virtual machine name>
 ```
 $ vagrant destroy <virtual machine name>
 ```
+
+## Allocating addition CPU and Memory to a Virtual Machine
+
+To increase the amount of either CPUs or memory update the `Vagrantfile` values as shown in the following snippet:
+
+```ruby
+  config.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 2
+  end
+```
+
 

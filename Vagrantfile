@@ -6,8 +6,21 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   #
+  # Configure VirtualBox Provider
+  #
+  config.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+      v.cpus = 2
+  end
+
+  #
   # Centos
   #
+
+  config.vm.define "centos-5.11" do |v|
+    v.vm.box = "puppetlabs/centos-5.11-64-puppet"
+    v.vm.hostname = "centos-5-11"
+  end
 
   config.vm.define "centos-6.6" do |v|
     v.vm.box = "puppetlabs/centos-6.6-64-puppet"
@@ -18,7 +31,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.vm.box = "puppetlabs/centos-7.0-64-puppet"
     v.vm.hostname = "centos-7-0"
   end
-
 
   #
   # Ubuntu
@@ -40,7 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.define "windows-2012-standard" do |v|
     v.vm.box = "opentable/win-2012-standard-amd64-nocm"
     # Name shortened due to limitation of Windows
-    v.vm.hostname = "cpu-corewin-2012"
+    v.vm.hostname = "win-serv-2012-r2"
     v.vm.communicator = "winrm"
     v.vm.network "forwarded_port", guest: 3389, host: 3389
   end
@@ -65,14 +77,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.facter = {
       "boundary_api_token" => ENV["BOUNDARY_API_TOKEN"]
     }
-  end
-
-  #
-  # Configure VirtualBox
-  #
-  config.vm.provider "virtualbox" do |v|
-      v.memory = 1024
-      v.cpus = 1
   end
 
 end
