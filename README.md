@@ -64,15 +64,6 @@ $ vagrant halt <virtual machine name>
 $ vagrant destroy <virtual machine name>
 ```
 
-## Allocating addition CPU and Memory to a Virtual Machine
 
-To increase the amount of either CPUs or memory update the `Vagrantfile` values as shown in the following snippet:
-
-```ruby
-  config.vm.provider "virtualbox" do |v|
-      v.memory = 1024
-      v.cpus = 2
-  end
-```
 
 
