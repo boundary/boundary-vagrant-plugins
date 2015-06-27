@@ -17,17 +17,17 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Centos
   #
 
-  config.vm.define "centos-5.11" do |v|
+  config.vm.define "centos-5.11", autostart: false do |v|
     v.vm.box = "puppetlabs/centos-5.11-64-puppet"
     v.vm.hostname = "centos-5-11"
   end
 
-  config.vm.define "centos-6.6" do |v|
+  config.vm.define "centos-6.6", autostart: false do |v|
     v.vm.box = "puppetlabs/centos-6.6-64-puppet"
     v.vm.hostname = "centos-6-6"
   end
 
-  config.vm.define "centos-7.0" do |v|
+  config.vm.define "centos-7.0", autostart: false do |v|
     v.vm.box = "puppetlabs/centos-7.0-64-puppet"
     v.vm.hostname = "centos-7-0"
   end
@@ -36,12 +36,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Ubuntu
   #
 
-  config.vm.define "ubuntu-12.04" do |v|
+  config.vm.define "ubuntu-12.04", autostart: false do |v|
     v.vm.box = "puppetlabs/ubuntu-12.04-64-puppet"
     v.vm.hostname = "ubuntu-12-04"
   end
 
-  config.vm.define "ubuntu-14.04" do |v|
+  config.vm.define "ubuntu-14.04", autostart: false do |v|
     v.vm.box = "puppetlabs/ubuntu-14.04-64-puppet"
     v.vm.hostname = "ubuntu-14-04"
   end
@@ -49,7 +49,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #
   # Windows
   #
-  config.vm.define "windows-2012-standard" do |v|
+  config.vm.define "windows-2012-standard", autostart: false do |v|
     v.vm.box = "opentable/win-2012-standard-amd64-nocm"
     # Name shortened due to limitation of Windows
     v.vm.hostname = "win-serv-2012-r2"
