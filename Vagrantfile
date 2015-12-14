@@ -38,7 +38,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "ubuntu-12.04", autostart: false do |v|
     v.vm.box = "puppetlabs/ubuntu-12.04-64-puppet"
-    v.vm.hostname = "ubuntu-12-04"
+    v.vm.hostname = "plugin-removal-test"
   end
 
   config.vm.define "ubuntu-14.04", autostart: false do |v|

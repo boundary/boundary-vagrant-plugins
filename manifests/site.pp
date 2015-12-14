@@ -15,23 +15,23 @@ class { 'boundary':
 
 node /^centos-7.0/ {
 
-  exec { 'update-rpm-packages':
+  exec { 'update-packages':
     command => '/usr/bin/yum update -y',
   }
 
   package {'epel-release':
     ensure => 'installed',
-    require => Exec['update-rpm-packages']
+    require => Exec['update-packages']
   }
 
   package { 'stress':
     ensure => 'installed',
-    require => Exec['update-rpm-packages']
+    require => Exec['update-packages']
   }
 
   package { 'sysstat':
     ensure => 'installed',
-    require => Exec['update-rpm-packages']
+    require => Exec['update-packages']
   }
 
 }
@@ -39,40 +39,40 @@ node /^centos-7.0/ {
 
 node /^centos/ {
 
-  exec { 'update-rpm-packages':
+  exec { 'update-packages':
     command => '/usr/bin/yum update -y',
   }
 
   package {'epel-release':
     ensure => 'installed',
-    require => Exec['update-rpm-packages']
+    require => Exec['update-packages']
   }
 
   package { 'stress':
     ensure => 'installed',
-    require => Exec['update-rpm-packages']
+    require => Exec['update-packages']
   }
 
   package { 'sysstat':
     ensure => 'installed',
-    require => Exec['update-rpm-packages']
+    require => Exec['update-packages']
   }
 
 }
 
 node /^ubuntu/ {
 
-  exec { 'update-apt-packages':
+  exec { 'update-packages':
     command => '/usr/bin/apt-get update -y',
   }
 
   package { 'stress':
-    require => Exec['update-rpm-packages']
+    require => Exec['update-packages']
   }
 
   package { 'sysstat':
     ensure => 'installed',
-    require => Exec['update-rpm-packages']
+    require => Exec['update-packages']
   }
 
 }
