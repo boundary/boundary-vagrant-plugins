@@ -9,11 +9,11 @@ file { 'bash_profile':
   source  => '/vagrant/manifests/bash_profile'
 }
 
-class { 'boundary':
-    token => $boundary_api_token,
-}
-
-node /^centos-7.0/ {
+#
+# Skip installation of meter on centos-7.0
+# until the meter puppet module is fixed
+#
+node /^centos-7/ {
 
   exec { 'update-packages':
     command => '/usr/bin/yum update -y',
@@ -58,6 +58,9 @@ node /^centos/ {
     require => Exec['update-packages']
   }
 
+  class { 'boundary':
+      token => $api_token,
+  }
 }
 
 node /^ubuntu/ {
@@ -73,6 +76,10 @@ node /^ubuntu/ {
   package { 'sysstat':
     ensure => 'installed',
     require => Exec['update-packages']
+  }
+
+  class { 'boundary':
+      token => $api_token,
   }
 
 }
