@@ -6,7 +6,7 @@ Package {
 file { 'bash_profile':
   path    => '/home/vagrant/.bash_profile',
   ensure  => file,
-  source  => '/vagrant/manifests/bash_profile'
+  source  => '/vagrant/environments/test/manifests/bash_profile'
 }
 
 #
@@ -23,17 +23,6 @@ node /^centos-7/ {
     ensure => 'installed',
     require => Exec['update-packages']
   }
-
-  package { 'stress':
-    ensure => 'installed',
-    require => Exec['update-packages']
-  }
-
-  package { 'sysstat':
-    ensure => 'installed',
-    require => Exec['update-packages']
-  }
-
 }
 
 
@@ -48,16 +37,6 @@ node /^centos/ {
     require => Exec['update-packages']
   }
 
-  package { 'stress':
-    ensure => 'installed',
-    require => Exec['update-packages']
-  }
-
-  package { 'sysstat':
-    ensure => 'installed',
-    require => Exec['update-packages']
-  }
-
   class { 'boundary':
       token => $api_token,
   }
@@ -67,15 +46,6 @@ node /^ubuntu/ {
 
   exec { 'update-packages':
     command => '/usr/bin/apt-get update -y',
-  }
-
-  package { 'stress':
-    require => Exec['update-packages']
-  }
-
-  package { 'sysstat':
-    ensure => 'installed',
-    require => Exec['update-packages']
   }
 
   class { 'boundary':

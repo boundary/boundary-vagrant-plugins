@@ -17,19 +17,22 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Centos
   #
 
-  config.vm.define "centos-5.11", autostart: false do |v|
-    v.vm.box = "puppetlabs/centos-5.11-64-puppet"
-    v.vm.hostname = "centos-5-11"
-  end
-
   config.vm.define "centos-6.6", autostart: false do |v|
     v.vm.box = "puppetlabs/centos-6.6-64-puppet"
+    v.vm.box_version = "1.0.1"
     v.vm.hostname = "centos-6-6"
   end
 
   config.vm.define "centos-7.0", autostart: false do |v|
     v.vm.box = "puppetlabs/centos-7.0-64-puppet"
+    v.vm.box_version = "1.0.1"
     v.vm.hostname = "centos-7-0"
+  end
+
+  config.vm.define "centos-7.2", autostart: false do |v|
+    v.vm.box = "puppetlabs/centos-7.2-64-puppet"
+    v.vm.box_version = "1.0.1"
+    v.vm.hostname = "centos-7-2"
   end
 
   #
@@ -38,11 +41,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.define "ubuntu-12.04", autostart: false do |v|
     v.vm.box = "puppetlabs/ubuntu-12.04-64-puppet"
-    v.vm.hostname = "ubuntu-12.04"
+    v.vm.box_version = "1.0.1"
+    v.vm.hostname = "ubuntu-12-04"
   end
 
   config.vm.define "ubuntu-14.04", autostart: false do |v|
     v.vm.box = "puppetlabs/ubuntu-14.04-64-puppet"
+    v.vm.box_version = "1.0.1"
     v.vm.hostname = "ubuntu-14-04"
   end
 
@@ -64,18 +69,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      shell.inline = "puppet module install puppetlabs-stdlib;
                      puppet module install puppetlabs-apt;
                      puppet module install boundary-boundary;
+                     cp /vagrant/environments/test/manifests/hiera.yml /etc
                      exit 0"
   end
 
   #
-  # Use Puppet to provision the server and setup an elastic search cluster
-  # on a single box
+  # Use Puppet to provision the server 
   #
   config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "manifests"
-    puppet.manifest_file  = "site.pp"
+    puppet.environment_path = "environments"
+    puppet.environment = "test"
     puppet.facter = {
-      "boundary_api_token" => ENV["BOUNDARY_API_TOKEN"]
+      "api_token" => ENV["TSP_API_TOKEN"]
     }
   end
 
