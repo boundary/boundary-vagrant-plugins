@@ -17,6 +17,7 @@ node /^centos-7/ {
 
   exec { 'update-packages':
     command => '/usr/bin/yum update -y',
+    timeout => 0,
   }
 
   package {'epel-release':
@@ -30,6 +31,7 @@ node /^centos/ {
 
   exec { 'update-packages':
     command => '/usr/bin/yum update -y',
+    timeout => 0,
   }
 
   package {'epel-release':
@@ -46,6 +48,7 @@ node /^ubuntu/ {
 
   exec { 'update-packages':
     command => '/usr/bin/apt-get update -y',
+    timeout => 0,
   }
 
   class { 'boundary':

@@ -17,6 +17,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Centos
   #
 
+  config.vm.define "centos-5.11", autostart: false do |v|
+    v.vm.box = "puppetlabs/centos-5.11-64-puppet"
+    v.vm.box_version = "1.0.1"
+    v.vm.hostname = "centos-5-11"
+  end
+
   config.vm.define "centos-6.6", autostart: false do |v|
     v.vm.box = "puppetlabs/centos-6.6-64-puppet"
     v.vm.box_version = "1.0.1"
@@ -69,7 +75,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      shell.inline = "puppet module install puppetlabs-stdlib;
                      puppet module install puppetlabs-apt;
                      puppet module install boundary-boundary;
-                     cp /vagrant/environments/test/manifests/hiera.yml /etc
+                     cp /vagrant/environments/test/manifests/hiera.yaml /etc/puppet
                      exit 0"
   end
 
